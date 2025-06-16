@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GLARGIVIN® Second Brand </title>
+  <style>
+    body {
+      margin: 0;
+      padding-top: 140px; /* height of header image */
+      background: #ffc600;
+      font-family: Arial, sans-serif;
+    }
+
+#header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background: #ffc600;
+  display: flex;           /* Added */
+  justify-content: center; /* Center horizontally */
+  align-items: center;     /* Center vertically */
+}
+
+#header img {
+  width: 80%;
+  height: auto;
+  display: block;
+}
+
+    #pdf-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .pdf-page {
+      background-color: #ffc600;
+      margin: 20px 0;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+      overflow: hidden;
+      border-radius: 4px;
+      width: 95%;
+      max-width: 95%;
+    }
+
+    canvas {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Fixed Header -->
+<div id="header">
+  <img src="glargivin_upper.png" alt="Header Image">
+</div>
+
+<!-- PDF Container -->
+<div id="pdf-container"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script>
+  const url = 'glargivin_secondbrand.pdf';
+  const container = document.getElementById('pdf-container');
+
+  pdfjsLib.getDocument(url).promise.then(pdf => {
+    const totalPages = pdf.numPages;
+
+    for (let pageNumber = 1; pageNumber <= totalPages; pageNumber++) {
+      pdf.getPage(pageNumber).then(page => {
+        const viewport = page.getViewport({ scale: 2 }); // High resolution
+        const canvas = document.createElement('canvas');
+        const context = canvas.getContext('2d');
+        canvas.width = viewport.width;
+        canvas.height = viewport.height;
+
+        const wrapper = document.createElement('div');
+        wrapper.className = 'pdf-page';
+        wrapper.style.width = `${viewport.width}px`;
+        wrapper.appendChild(canvas);
+        container.appendChild(wrapper);
+
+        page.render({
+          canvasContext: context,
+          viewport: viewport
+        });
+      });
+    }
+  });
+</script>
+
+</body>
+</html>
