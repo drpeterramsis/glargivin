@@ -74,25 +74,60 @@
       width: 25rem;
       height: auto;
     }
+
+    
+    #start-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #000000cc;
+      color: white;
+      font-size: 2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
 
  
-
-  <!-- Blurred Background Video (Muted) -->
-  <video id="background-video" autoplay muted loop playsinline>
+  <!-- Background Video (Will be muted and started by user) -->
+  <video id="background-video" loop playsinline muted>
     <source src="https://drpeterramsis.github.io/glargivin/eva_insulin.mp4" type="video/mp4">
-    Your browser does not support the video tag.
   </video>
 
-  <!-- Foreground Video (With Sound, No Controls) -->
+  <!-- Foreground Video (With Sound, started by same click) -->
   <div id="video-container">
-    <video autoplay loop playsinline>
+    <video id="foreground-video" loop playsinline>
       <source src="https://drpeterramsis.github.io/glargivin/eva_insulin.mp4" type="video/mp4">
-      Your browser does not support the video tag.
     </video>
   </div>
+
+  <!-- Start Button Overlay -->
+  <div id="start-overlay">▶ Tap to Start</div>
+
+  <script>
+    const overlay = document.getElementById('start-overlay');
+    const backgroundVideo = document.getElementById('background-video');
+    const foregroundVideo = document.getElementById('foreground-video');
+
+    overlay.addEventListener('click', () => {
+      overlay.style.display = 'none';
+
+      // Ensure background is muted, then play
+      backgroundVideo.muted = true;
+      backgroundVideo.play().catch(err => console.error('Background video error:', err));
+
+      // Foreground plays with sound
+      foregroundVideo.muted = false;
+      foregroundVideo.play().catch(err => console.error('Foreground video error:', err));
+    });
+  </script>
 
 </body>
 </html>
