@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <!-- WhatsApp / Open Graph Meta Tags -->
+  <meta property="og:image" content="https://drpeterramsis.github.io/glargivin/assets/glargivin_2nd_brand.png" />
+  <meta property="og:image:alt" content="EVA INSULIN" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="512" />
+  <meta property="og:image:height" content="512" />
+  <meta property="og:title" content="EVA INSULIN" />
+  <meta property="og:description" content="GLARGIVIN® HUMAXIN®" />
+
+  <title>GLARGIVIN® Second Brand</title>
+
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+    }
+
+    /* Blurred full-page background video */
+    #background-video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -2;
+      filter: blur(15px) brightness(0.6);
+    }
+
+    /* Foreground video container */
+    #video-container {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 10;
+      width: 80%;
+      max-width: 720px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    video {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Optional header styling */
+    #header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 100;
+      background: transparent;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem;
+    }
+
+    #header img {
+      width: 25rem;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+
+ 
+
+  <!-- Blurred Background Video (Muted) -->
+  <video id="background-video" autoplay muted loop playsinline>
+    <source src="https://drpeterramsis.github.io/glargivin/eva_insulin.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <!-- Foreground Video (With Sound, No Controls) -->
+  <div id="video-container">
+    <video autoplay loop playsinline>
+      <source src="https://drpeterramsis.github.io/glargivin/eva_insulin.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+
+</body>
+</html>
